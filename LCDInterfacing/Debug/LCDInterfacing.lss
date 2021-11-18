@@ -1,0 +1,1061 @@
+
+LCDInterfacing.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000005ba  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000013e  00800060  000005ba  0000064e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          000000ea  0080019e  0080019e  0000078c  2**0
+                  ALLOC
+  3 .comment      0000005c  00000000  00000000  0000078c  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000178  00000000  00000000  000007e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000177d  00000000  00000000  00000960  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000702  00000000  00000000  000020dd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000008b1  00000000  00000000  000027df  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000440  00000000  00000000  00003090  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000609  00000000  00000000  000034d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000df0  00000000  00000000  00003ad9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000150  00000000  00000000  000048c9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 7f 02 	jmp	0x4fe	; 0x4fe <__vector_9>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 b8 01 	jmp	0x370	; 0x370 <__vector_13>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea eb       	ldi	r30, 0xBA	; 186
+  68:	f5 e0       	ldi	r31, 0x05	; 5
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ae 39       	cpi	r26, 0x9E	; 158
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	22 e0       	ldi	r18, 0x02	; 2
+  78:	ae e9       	ldi	r26, 0x9E	; 158
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a8 38       	cpi	r26, 0x88	; 136
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 93 01 	call	0x326	; 0x326 <main>
+  8a:	0c 94 db 02 	jmp	0x5b6	; 0x5b6 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <Read_Response>:
+	USART_SendString("\",\"");
+	USART_SendString(Port);
+	USART_SendString("\"\r");
+
+	CRLF_COUNT = 2;
+	if(!WaitForExpectedResponse("CONNECT OK"))
+  92:	2f 92       	push	r2
+  94:	3f 92       	push	r3
+  96:	4f 92       	push	r4
+  98:	5f 92       	push	r5
+  9a:	6f 92       	push	r6
+  9c:	7f 92       	push	r7
+	{
+		if(Response_Status == SIM900_RESPONSE_TIMEOUT)
+  9e:	8f 92       	push	r8
+  a0:	9f 92       	push	r9
+  a2:	af 92       	push	r10
+  a4:	bf 92       	push	r11
+  a6:	cf 92       	push	r12
+		return SIM900_RESPONSE_TIMEOUT;
+		return SIM900_RESPONSE_ERROR;
+	}
+	return SIM900_RESPONSE_FINISHED;
+  a8:	df 92       	push	r13
+  aa:	ef 92       	push	r14
+	CRLF_COUNT = 2;
+	if(!WaitForExpectedResponse("CONNECT OK"))
+	{
+		if(Response_Status == SIM900_RESPONSE_TIMEOUT)
+		return SIM900_RESPONSE_TIMEOUT;
+		return SIM900_RESPONSE_ERROR;
+  ac:	ff 92       	push	r15
+	}
+	return SIM900_RESPONSE_FINISHED;
+}
+  ae:	0f 93       	push	r16
+  b0:	1f 93       	push	r17
+  b2:	cf 93       	push	r28
+  b4:	df 93       	push	r29
+  b6:	00 d0       	rcall	.+0      	; 0xb8 <Read_Response+0x26>
+  b8:	00 d0       	rcall	.+0      	; 0xba <Read_Response+0x28>
+  ba:	cd b7       	in	r28, 0x3d	; 61
+  bc:	de b7       	in	r29, 0x3e	; 62
+  be:	80 91 9e 01 	lds	r24, 0x019E
+  c2:	90 91 9f 01 	lds	r25, 0x019F
+  c6:	a0 91 a0 01 	lds	r26, 0x01A0
+  ca:	b0 91 a1 01 	lds	r27, 0x01A1
+	char CRLF_BUF[2];
+	char CRLF_FOUND;
+	uint32_t TimeCount = 0, ResponseBufferLength;
+	while(1)
+	{
+		if(TimeCount >= (DEFAULT_TIMEOUT+TimeOut))
+  ce:	80 3f       	cpi	r24, 0xF0	; 240
+  d0:	98 4d       	sbci	r25, 0xD8	; 216
+  d2:	af 4f       	sbci	r26, 0xFF	; 255
+  d4:	bf 4f       	sbci	r27, 0xFF	; 255
+  d6:	71 f4       	brne	.+28     	; 0xf4 <Read_Response+0x62>
+		{
+			CRLF_COUNT = 0; TimeOut = 0;
+  d8:	10 92 a6 01 	sts	0x01A6, r1
+  dc:	10 92 9e 01 	sts	0x019E, r1
+  e0:	10 92 9f 01 	sts	0x019F, r1
+  e4:	10 92 a0 01 	sts	0x01A0, r1
+  e8:	10 92 a1 01 	sts	0x01A1, r1
+			Response_Status = SIM900_RESPONSE_TIMEOUT;
+  ec:	82 e0       	ldi	r24, 0x02	; 2
+  ee:	80 93 87 02 	sts	0x0287, r24
+			return;
+  f2:	9e c0       	rjmp	.+316    	; 0x230 <Read_Response+0x19e>
+
+void Read_Response()
+{
+	char CRLF_BUF[2];
+	char CRLF_FOUND;
+	uint32_t TimeCount = 0, ResponseBufferLength;
+  f4:	81 2c       	mov	r8, r1
+  f6:	91 2c       	mov	r9, r1
+  f8:	54 01       	movw	r10, r8
+				{
+					memmove(CRLF_BUF, CRLF_BUF + 1, 1);
+					CRLF_BUF[1] = RESPONSE_BUFFER[i];
+					if(!strncmp(CRLF_BUF, "\r\n", 2))
+					{
+						if(++CRLF_FOUND == (DEFAULT_CRLF_COUNT+CRLF_COUNT))
+  fa:	21 2c       	mov	r2, r1
+			CRLF_COUNT = 0; TimeOut = 0;
+			Response_Status = SIM900_RESPONSE_TIMEOUT;
+			return;
+		}
+
+		if(Response_Status == SIM900_RESPONSE_STARTING)
+  fc:	80 91 87 02 	lds	r24, 0x0287
+ 100:	84 30       	cpi	r24, 0x04	; 4
+ 102:	21 f4       	brne	.+8      	; 0x10c <Read_Response+0x7a>
+		{
+			CRLF_FOUND = 0;
+			/* fill memory block with a certain value memset(void *ptr, int x , size_t n) */
+			memset(CRLF_BUF, 0, 2);
+ 104:	1a 82       	std	Y+2, r1	; 0x02
+ 106:	19 82       	std	Y+1, r1	; 0x01
+			
+			Response_Status = SIM900_RESPONSE_WAITING;
+ 108:	10 92 87 02 	sts	0x0287, r1
+		}
+		ResponseBufferLength = strlen(RESPONSE_BUFFER);
+ 10c:	eb ea       	ldi	r30, 0xAB	; 171
+ 10e:	f1 e0       	ldi	r31, 0x01	; 1
+ 110:	01 90       	ld	r0, Z+
+ 112:	00 20       	and	r0, r0
+ 114:	e9 f7       	brne	.-6      	; 0x110 <Read_Response+0x7e>
+ 116:	31 97       	sbiw	r30, 0x01	; 1
+ 118:	cf 01       	movw	r24, r30
+ 11a:	8b 5a       	subi	r24, 0xAB	; 171
+ 11c:	91 40       	sbci	r25, 0x01	; 1
+ 11e:	a0 e0       	ldi	r26, 0x00	; 0
+ 120:	b0 e0       	ldi	r27, 0x00	; 0
+		if (ResponseBufferLength)
+ 122:	00 97       	sbiw	r24, 0x00	; 0
+ 124:	a1 05       	cpc	r26, r1
+ 126:	b1 05       	cpc	r27, r1
+ 128:	09 f4       	brne	.+2      	; 0x12c <Read_Response+0x9a>
+ 12a:	64 c0       	rjmp	.+200    	; 0x1f4 <Read_Response+0x162>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 12c:	ef e9       	ldi	r30, 0x9F	; 159
+ 12e:	ff e0       	ldi	r31, 0x0F	; 15
+ 130:	31 97       	sbiw	r30, 0x01	; 1
+ 132:	f1 f7       	brne	.-4      	; 0x130 <Read_Response+0x9e>
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <Read_Response+0xa4>
+ 136:	00 00       	nop
+		{
+			_delay_ms(1);
+			TimeCount++;
+ 138:	ff ef       	ldi	r31, 0xFF	; 255
+ 13a:	8f 1a       	sub	r8, r31
+ 13c:	9f 0a       	sbc	r9, r31
+ 13e:	af 0a       	sbc	r10, r31
+ 140:	bf 0a       	sbc	r11, r31
+			if (ResponseBufferLength==strlen(RESPONSE_BUFFER))
+ 142:	eb ea       	ldi	r30, 0xAB	; 171
+ 144:	f1 e0       	ldi	r31, 0x01	; 1
+ 146:	01 90       	ld	r0, Z+
+ 148:	00 20       	and	r0, r0
+ 14a:	e9 f7       	brne	.-6      	; 0x146 <Read_Response+0xb4>
+ 14c:	31 97       	sbiw	r30, 0x01	; 1
+ 14e:	9f 01       	movw	r18, r30
+ 150:	2b 5a       	subi	r18, 0xAB	; 171
+ 152:	31 40       	sbci	r19, 0x01	; 1
+ 154:	29 01       	movw	r4, r18
+ 156:	61 2c       	mov	r6, r1
+ 158:	71 2c       	mov	r7, r1
+ 15a:	48 16       	cp	r4, r24
+ 15c:	59 06       	cpc	r5, r25
+ 15e:	6a 06       	cpc	r6, r26
+ 160:	7b 06       	cpc	r7, r27
+ 162:	09 f0       	breq	.+2      	; 0x166 <Read_Response+0xd4>
+ 164:	47 c0       	rjmp	.+142    	; 0x1f4 <Read_Response+0x162>
+			{
+				for (uint16_t i=0;i<ResponseBufferLength;i++)
+ 166:	41 14       	cp	r4, r1
+ 168:	51 04       	cpc	r5, r1
+ 16a:	61 04       	cpc	r6, r1
+ 16c:	71 04       	cpc	r7, r1
+ 16e:	09 f4       	brne	.+2      	; 0x172 <Read_Response+0xe0>
+ 170:	41 c0       	rjmp	.+130    	; 0x1f4 <Read_Response+0x162>
+				{
+					memmove(CRLF_BUF, CRLF_BUF + 1, 1);
+					CRLF_BUF[1] = RESPONSE_BUFFER[i];
+					if(!strncmp(CRLF_BUF, "\r\n", 2))
+					{
+						if(++CRLF_FOUND == (DEFAULT_CRLF_COUNT+CRLF_COUNT))
+ 172:	80 91 a6 01 	lds	r24, 0x01A6
+ 176:	99 27       	eor	r25, r25
+ 178:	87 fd       	sbrc	r24, 7
+ 17a:	90 95       	com	r25
+ 17c:	9c 01       	movw	r18, r24
+ 17e:	2e 5f       	subi	r18, 0xFE	; 254
+ 180:	3f 4f       	sbci	r19, 0xFF	; 255
+ 182:	3c 83       	std	Y+4, r19	; 0x04
+ 184:	2b 83       	std	Y+3, r18	; 0x03
+ 186:	0b ea       	ldi	r16, 0xAB	; 171
+ 188:	11 e0       	ldi	r17, 0x01	; 1
+ 18a:	c2 2c       	mov	r12, r2
+ 18c:	d1 2c       	mov	r13, r1
+ 18e:	e1 2c       	mov	r14, r1
+ 190:	f1 2c       	mov	r15, r1
+ 192:	31 2c       	mov	r3, r1
+			TimeCount++;
+			if (ResponseBufferLength==strlen(RESPONSE_BUFFER))
+			{
+				for (uint16_t i=0;i<ResponseBufferLength;i++)
+				{
+					memmove(CRLF_BUF, CRLF_BUF + 1, 1);
+ 194:	8a 81       	ldd	r24, Y+2	; 0x02
+ 196:	89 83       	std	Y+1, r24	; 0x01
+					CRLF_BUF[1] = RESPONSE_BUFFER[i];
+ 198:	f8 01       	movw	r30, r16
+ 19a:	81 91       	ld	r24, Z+
+ 19c:	8f 01       	movw	r16, r30
+ 19e:	8a 83       	std	Y+2, r24	; 0x02
+					if(!strncmp(CRLF_BUF, "\r\n", 2))
+ 1a0:	42 e0       	ldi	r20, 0x02	; 2
+ 1a2:	50 e0       	ldi	r21, 0x00	; 0
+ 1a4:	64 e6       	ldi	r22, 0x64	; 100
+ 1a6:	70 e0       	ldi	r23, 0x00	; 0
+ 1a8:	ce 01       	movw	r24, r28
+ 1aa:	01 96       	adiw	r24, 0x01	; 1
+ 1ac:	0e 94 b3 02 	call	0x566	; 0x566 <strncmp>
+ 1b0:	89 2b       	or	r24, r25
+ 1b2:	b1 f4       	brne	.+44     	; 0x1e0 <Read_Response+0x14e>
+					{
+						if(++CRLF_FOUND == (DEFAULT_CRLF_COUNT+CRLF_COUNT))
+ 1b4:	33 94       	inc	r3
+ 1b6:	83 2d       	mov	r24, r3
+ 1b8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ba:	2b 81       	ldd	r18, Y+3	; 0x03
+ 1bc:	3c 81       	ldd	r19, Y+4	; 0x04
+ 1be:	82 17       	cp	r24, r18
+ 1c0:	93 07       	cpc	r25, r19
+ 1c2:	71 f4       	brne	.+28     	; 0x1e0 <Read_Response+0x14e>
+						{
+							CRLF_COUNT = 0; TimeOut = 0;
+ 1c4:	10 92 a6 01 	sts	0x01A6, r1
+ 1c8:	10 92 9e 01 	sts	0x019E, r1
+ 1cc:	10 92 9f 01 	sts	0x019F, r1
+ 1d0:	10 92 a0 01 	sts	0x01A0, r1
+ 1d4:	10 92 a1 01 	sts	0x01A1, r1
+							Response_Status = SIM900_RESPONSE_FINISHED;
+ 1d8:	81 e0       	ldi	r24, 0x01	; 1
+ 1da:	80 93 87 02 	sts	0x0287, r24
+							return;
+ 1de:	28 c0       	rjmp	.+80     	; 0x230 <Read_Response+0x19e>
+ 1e0:	3f ef       	ldi	r19, 0xFF	; 255
+ 1e2:	c3 1a       	sub	r12, r19
+ 1e4:	d3 0a       	sbc	r13, r19
+ 1e6:	e3 0a       	sbc	r14, r19
+ 1e8:	f3 0a       	sbc	r15, r19
+		{
+			_delay_ms(1);
+			TimeCount++;
+			if (ResponseBufferLength==strlen(RESPONSE_BUFFER))
+			{
+				for (uint16_t i=0;i<ResponseBufferLength;i++)
+ 1ea:	c4 14       	cp	r12, r4
+ 1ec:	d5 04       	cpc	r13, r5
+ 1ee:	e6 04       	cpc	r14, r6
+ 1f0:	f7 04       	cpc	r15, r7
+ 1f2:	81 f6       	brne	.-96     	; 0x194 <Read_Response+0x102>
+ 1f4:	8f e9       	ldi	r24, 0x9F	; 159
+ 1f6:	9f e0       	ldi	r25, 0x0F	; 15
+ 1f8:	01 97       	sbiw	r24, 0x01	; 1
+ 1fa:	f1 f7       	brne	.-4      	; 0x1f8 <Read_Response+0x166>
+ 1fc:	00 c0       	rjmp	.+0      	; 0x1fe <Read_Response+0x16c>
+ 1fe:	00 00       	nop
+				}
+				CRLF_FOUND = 0;
+			}
+		}
+		_delay_ms(1);
+		TimeCount++;
+ 200:	9f ef       	ldi	r25, 0xFF	; 255
+ 202:	89 1a       	sub	r8, r25
+ 204:	99 0a       	sbc	r9, r25
+ 206:	a9 0a       	sbc	r10, r25
+ 208:	b9 0a       	sbc	r11, r25
+	char CRLF_BUF[2];
+	char CRLF_FOUND;
+	uint32_t TimeCount = 0, ResponseBufferLength;
+	while(1)
+	{
+		if(TimeCount >= (DEFAULT_TIMEOUT+TimeOut))
+ 20a:	80 91 9e 01 	lds	r24, 0x019E
+ 20e:	90 91 9f 01 	lds	r25, 0x019F
+ 212:	a0 91 a0 01 	lds	r26, 0x01A0
+ 216:	b0 91 a1 01 	lds	r27, 0x01A1
+ 21a:	80 5f       	subi	r24, 0xF0	; 240
+ 21c:	98 4d       	sbci	r25, 0xD8	; 216
+ 21e:	af 4f       	sbci	r26, 0xFF	; 255
+ 220:	bf 4f       	sbci	r27, 0xFF	; 255
+ 222:	88 16       	cp	r8, r24
+ 224:	99 06       	cpc	r9, r25
+ 226:	aa 06       	cpc	r10, r26
+ 228:	bb 06       	cpc	r11, r27
+ 22a:	08 f4       	brcc	.+2      	; 0x22e <Read_Response+0x19c>
+ 22c:	67 cf       	rjmp	.-306    	; 0xfc <Read_Response+0x6a>
+ 22e:	54 cf       	rjmp	.-344    	; 0xd8 <Read_Response+0x46>
+			}
+		}
+		_delay_ms(1);
+		TimeCount++;
+	}
+}
+ 230:	0f 90       	pop	r0
+ 232:	0f 90       	pop	r0
+ 234:	0f 90       	pop	r0
+ 236:	0f 90       	pop	r0
+ 238:	df 91       	pop	r29
+ 23a:	cf 91       	pop	r28
+ 23c:	1f 91       	pop	r17
+ 23e:	0f 91       	pop	r16
+ 240:	ff 90       	pop	r15
+ 242:	ef 90       	pop	r14
+ 244:	df 90       	pop	r13
+ 246:	cf 90       	pop	r12
+ 248:	bf 90       	pop	r11
+ 24a:	af 90       	pop	r10
+ 24c:	9f 90       	pop	r9
+ 24e:	8f 90       	pop	r8
+ 250:	7f 90       	pop	r7
+ 252:	6f 90       	pop	r6
+ 254:	5f 90       	pop	r5
+ 256:	4f 90       	pop	r4
+ 258:	3f 90       	pop	r3
+ 25a:	2f 90       	pop	r2
+ 25c:	08 95       	ret
+
+0000025e <TCPClient_Clear>:
+
+void TCPClient_Clear()
+{
+	memset(RESPONSE_BUFFER,0,DEFAULT_BUFFER_SIZE);
+ 25e:	88 ec       	ldi	r24, 0xC8	; 200
+ 260:	eb ea       	ldi	r30, 0xAB	; 171
+ 262:	f1 e0       	ldi	r31, 0x01	; 1
+ 264:	df 01       	movw	r26, r30
+ 266:	1d 92       	st	X+, r1
+ 268:	8a 95       	dec	r24
+ 26a:	e9 f7       	brne	.-6      	; 0x266 <TCPClient_Clear+0x8>
+	Counter = 0;	pointer = 0;
+ 26c:	10 92 a5 01 	sts	0x01A5, r1
+ 270:	10 92 a4 01 	sts	0x01A4, r1
+ 274:	10 92 a3 01 	sts	0x01A3, r1
+ 278:	10 92 a2 01 	sts	0x01A2, r1
+ 27c:	08 95       	ret
+
+0000027e <Start_Read_Response>:
+}
+
+void Start_Read_Response()
+{
+	Response_Status = SIM900_RESPONSE_STARTING;
+ 27e:	84 e0       	ldi	r24, 0x04	; 4
+ 280:	80 93 87 02 	sts	0x0287, r24
+	do {
+		Read_Response();
+ 284:	0e 94 49 00 	call	0x92	; 0x92 <Read_Response>
+	} while(Response_Status == SIM900_RESPONSE_WAITING);
+ 288:	80 91 87 02 	lds	r24, 0x0287
+ 28c:	88 23       	and	r24, r24
+ 28e:	d1 f3       	breq	.-12     	; 0x284 <Start_Read_Response+0x6>
+
+}
+ 290:	08 95       	ret
+
+00000292 <WaitForExpectedResponse>:
+	if(!strncmp(Response + tmp - 6, "\r\nOK\r\n", 6))
+	memset(Response + tmp - 6, 0, i + 6);
+}
+
+bool WaitForExpectedResponse(char* ExpectedResponse)
+{
+ 292:	cf 93       	push	r28
+ 294:	df 93       	push	r29
+ 296:	ec 01       	movw	r28, r24
+	TCPClient_Clear();
+ 298:	0e 94 2f 01 	call	0x25e	; 0x25e <TCPClient_Clear>
+ 29c:	2f ef       	ldi	r18, 0xFF	; 255
+ 29e:	83 ed       	ldi	r24, 0xD3	; 211
+ 2a0:	90 e3       	ldi	r25, 0x30	; 48
+ 2a2:	21 50       	subi	r18, 0x01	; 1
+ 2a4:	80 40       	sbci	r24, 0x00	; 0
+ 2a6:	90 40       	sbci	r25, 0x00	; 0
+ 2a8:	e1 f7       	brne	.-8      	; 0x2a2 <WaitForExpectedResponse+0x10>
+ 2aa:	00 c0       	rjmp	.+0      	; 0x2ac <WaitForExpectedResponse+0x1a>
+ 2ac:	00 00       	nop
+	_delay_ms(1000);
+	Start_Read_Response();						/* First read response */
+ 2ae:	0e 94 3f 01 	call	0x27e	; 0x27e <Start_Read_Response>
+	if((Response_Status != SIM900_RESPONSE_TIMEOUT) && (strstr(RESPONSE_BUFFER, ExpectedResponse) != NULL))
+ 2b2:	80 91 87 02 	lds	r24, 0x0287
+ 2b6:	82 30       	cpi	r24, 0x02	; 2
+ 2b8:	51 f0       	breq	.+20     	; 0x2ce <WaitForExpectedResponse+0x3c>
+ 2ba:	be 01       	movw	r22, r28
+ 2bc:	8b ea       	ldi	r24, 0xAB	; 171
+ 2be:	91 e0       	ldi	r25, 0x01	; 1
+ 2c0:	0e 94 c1 02 	call	0x582	; 0x582 <strstr>
+ 2c4:	21 e0       	ldi	r18, 0x01	; 1
+ 2c6:	89 2b       	or	r24, r25
+ 2c8:	19 f4       	brne	.+6      	; 0x2d0 <WaitForExpectedResponse+0x3e>
+ 2ca:	20 e0       	ldi	r18, 0x00	; 0
+ 2cc:	01 c0       	rjmp	.+2      	; 0x2d0 <WaitForExpectedResponse+0x3e>
+	return true;							/* Return true for success */
+	return false;								/* Else return false */
+ 2ce:	20 e0       	ldi	r18, 0x00	; 0
+}
+ 2d0:	82 2f       	mov	r24, r18
+ 2d2:	df 91       	pop	r29
+ 2d4:	cf 91       	pop	r28
+ 2d6:	08 95       	ret
+
+000002d8 <SendATandExpectResponse>:
+
+bool SendATandExpectResponse(char* ATCommand, char* ExpectedResponse)
+{
+ 2d8:	cf 93       	push	r28
+ 2da:	df 93       	push	r29
+ 2dc:	eb 01       	movw	r28, r22
+	USART_SendString(ATCommand);				/* Send AT command to SIM900 */
+ 2de:	0e 94 a4 02 	call	0x548	; 0x548 <USART_SendString>
+	USART_TxChar('\r');
+ 2e2:	8d e0       	ldi	r24, 0x0D	; 13
+ 2e4:	0e 94 a0 02 	call	0x540	; 0x540 <USART_TxChar>
+	return WaitForExpectedResponse(ExpectedResponse);
+ 2e8:	ce 01       	movw	r24, r28
+ 2ea:	0e 94 49 01 	call	0x292	; 0x292 <WaitForExpectedResponse>
+}
+ 2ee:	df 91       	pop	r29
+ 2f0:	cf 91       	pop	r28
+ 2f2:	08 95       	ret
+
+000002f4 <SIM900_Start>:
+
+char * SIM900_Start()
+{
+	for (uint8_t i=0;i<1;i++)
+	{	
+		if(SendATandExpectResponse("ATE0","OK")||SendATandExpectResponse("AT","OK"))
+ 2f4:	69 e8       	ldi	r22, 0x89	; 137
+ 2f6:	71 e0       	ldi	r23, 0x01	; 1
+ 2f8:	8b e9       	ldi	r24, 0x9B	; 155
+ 2fa:	90 e0       	ldi	r25, 0x00	; 0
+ 2fc:	0e 94 6c 01 	call	0x2d8	; 0x2d8 <SendATandExpectResponse>
+ 300:	81 11       	cpse	r24, r1
+ 302:	0b c0       	rjmp	.+22     	; 0x31a <SIM900_Start+0x26>
+ 304:	69 e8       	ldi	r22, 0x89	; 137
+ 306:	71 e0       	ldi	r23, 0x01	; 1
+ 308:	80 ea       	ldi	r24, 0xA0	; 160
+ 30a:	90 e0       	ldi	r25, 0x00	; 0
+ 30c:	0e 94 6c 01 	call	0x2d8	; 0x2d8 <SendATandExpectResponse>
+ 310:	88 23       	and	r24, r24
+ 312:	31 f0       	breq	.+12     	; 0x320 <SIM900_Start+0x2c>
+		return "true";
+ 314:	80 e9       	ldi	r24, 0x90	; 144
+ 316:	90 e0       	ldi	r25, 0x00	; 0
+ 318:	08 95       	ret
+ 31a:	80 e9       	ldi	r24, 0x90	; 144
+ 31c:	90 e0       	ldi	r25, 0x00	; 0
+ 31e:	08 95       	ret
+	}
+	return "false";
+ 320:	85 e9       	ldi	r24, 0x95	; 149
+ 322:	90 e0       	ldi	r25, 0x00	; 0
+}
+ 324:	08 95       	ret
+
+00000326 <main>:
+{
+	//long  count;
+	//char string[10];
+	//double  distance;
+
+	LCD_Init();
+ 326:	0e 94 42 02 	call	0x484	; 0x484 <LCD_Init>
+	//SensorInit();
+	sei();
+ 32a:	78 94       	sei
+	USART_Init(9600);
+ 32c:	60 e8       	ldi	r22, 0x80	; 128
+ 32e:	75 e2       	ldi	r23, 0x25	; 37
+ 330:	80 e0       	ldi	r24, 0x00	; 0
+ 332:	90 e0       	ldi	r25, 0x00	; 0
+ 334:	0e 94 96 02 	call	0x52c	; 0x52c <USART_Init>
+	LCD_String("Electron Solution");
+ 338:	8c e8       	ldi	r24, 0x8C	; 140
+ 33a:	91 e0       	ldi	r25, 0x01	; 1
+ 33c:	0e 94 63 02 	call	0x4c6	; 0x4c6 <LCD_String>
+	LCD_Command(0xC0); /* Go to 2nd line */
+ 340:	80 ec       	ldi	r24, 0xC0	; 192
+ 342:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+	//while(!SIM900_Start());
+	LCD_String(SIM900_Start());
+ 346:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <SIM900_Start>
+ 34a:	0e 94 63 02 	call	0x4c6	; 0x4c6 <LCD_String>
+	//TCPClient_ConnectionMode(0);			/* 0 = Single; 1 = Multi */
+	//TCPClient_ApplicationMode(0);			/* 0 = Normal Mode; 1 = Transperant Mode */
+//	AttachGPRS();
+	//TCPClient_Connect(APN, USERNAME, PASSWORD);
+	while(1){
+		if(Flag == 1)
+ 34e:	80 91 a7 01 	lds	r24, 0x01A7
+ 352:	90 91 a8 01 	lds	r25, 0x01A8
+ 356:	01 97       	sbiw	r24, 0x01	; 1
+ 358:	d1 f7       	brne	.-12     	; 0x34e <main+0x28>
+		{
+			LCD_Clear();
+ 35a:	0e 94 72 02 	call	0x4e4	; 0x4e4 <LCD_Clear>
+			LCD_String(RESPONSE_BUFFER);
+ 35e:	8b ea       	ldi	r24, 0xAB	; 171
+ 360:	91 e0       	ldi	r25, 0x01	; 1
+ 362:	0e 94 63 02 	call	0x4c6	; 0x4c6 <LCD_String>
+		//	USART_SendString(RESPONSE_BUFFER);
+		//	LCD_String(RESPONSE_BUFFER);
+			Flag = 0;
+ 366:	10 92 a8 01 	sts	0x01A8, r1
+ 36a:	10 92 a7 01 	sts	0x01A7, r1
+ 36e:	ef cf       	rjmp	.-34     	; 0x34e <main+0x28>
+
+00000370 <__vector_13>:
+	return 0;
+}
+
+
+ISR (USART_RXC_vect)
+{
+ 370:	1f 92       	push	r1
+ 372:	0f 92       	push	r0
+ 374:	0f b6       	in	r0, 0x3f	; 63
+ 376:	0f 92       	push	r0
+ 378:	11 24       	eor	r1, r1
+ 37a:	2f 93       	push	r18
+ 37c:	8f 93       	push	r24
+ 37e:	9f 93       	push	r25
+ 380:	ef 93       	push	r30
+ 382:	ff 93       	push	r31
+	
+	uint8_t oldsrg = SREG;
+ 384:	2f b7       	in	r18, 0x3f	; 63
+	Flag = 1;
+ 386:	81 e0       	ldi	r24, 0x01	; 1
+ 388:	90 e0       	ldi	r25, 0x00	; 0
+ 38a:	90 93 a8 01 	sts	0x01A8, r25
+ 38e:	80 93 a7 01 	sts	0x01A7, r24
+	RESPONSE_BUFFER[Counter] = UDR;
+ 392:	e0 91 a4 01 	lds	r30, 0x01A4
+ 396:	f0 91 a5 01 	lds	r31, 0x01A5
+ 39a:	8c b1       	in	r24, 0x0c	; 12
+ 39c:	e5 55       	subi	r30, 0x55	; 85
+ 39e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 3a0:	80 83       	st	Z, r24
+	Counter++;
+ 3a2:	80 91 a4 01 	lds	r24, 0x01A4
+ 3a6:	90 91 a5 01 	lds	r25, 0x01A5
+ 3aa:	01 96       	adiw	r24, 0x01	; 1
+ 3ac:	90 93 a5 01 	sts	0x01A5, r25
+ 3b0:	80 93 a4 01 	sts	0x01A4, r24
+	if(Counter == DEFAULT_BUFFER_SIZE){
+ 3b4:	80 91 a4 01 	lds	r24, 0x01A4
+ 3b8:	90 91 a5 01 	lds	r25, 0x01A5
+ 3bc:	88 3c       	cpi	r24, 0xC8	; 200
+ 3be:	91 05       	cpc	r25, r1
+ 3c0:	41 f4       	brne	.+16     	; 0x3d2 <__vector_13+0x62>
+		Counter = 0; pointer = 0;
+ 3c2:	10 92 a5 01 	sts	0x01A5, r1
+ 3c6:	10 92 a4 01 	sts	0x01A4, r1
+ 3ca:	10 92 a3 01 	sts	0x01A3, r1
+ 3ce:	10 92 a2 01 	sts	0x01A2, r1
+	}
+	SREG = oldsrg;
+ 3d2:	2f bf       	out	0x3f, r18	; 63
+}
+ 3d4:	ff 91       	pop	r31
+ 3d6:	ef 91       	pop	r30
+ 3d8:	9f 91       	pop	r25
+ 3da:	8f 91       	pop	r24
+ 3dc:	2f 91       	pop	r18
+ 3de:	0f 90       	pop	r0
+ 3e0:	0f be       	out	0x3f, r0	; 63
+ 3e2:	0f 90       	pop	r0
+ 3e4:	1f 90       	pop	r1
+ 3e6:	18 95       	reti
+
+000003e8 <LCD_Command>:
+#include "lcdlib.h"
+
+
+void LCD_Command( unsigned char cmnd )
+{
+	LCD_Port = (LCD_Port & 0xC3) | (cmnd  >> 2); /* sending upper nibble */
+ 3e8:	95 b3       	in	r25, 0x15	; 21
+ 3ea:	28 2f       	mov	r18, r24
+ 3ec:	26 95       	lsr	r18
+ 3ee:	26 95       	lsr	r18
+ 3f0:	93 7c       	andi	r25, 0xC3	; 195
+ 3f2:	92 2b       	or	r25, r18
+ 3f4:	95 bb       	out	0x15, r25	; 21
+	LCD_Port &= ~ (1<<RS);		/* RS=0, command reg. */
+ 3f6:	a8 98       	cbi	0x15, 0	; 21
+	LCD_Port |= (1<<EN);		/* Enable pulse */
+ 3f8:	a9 9a       	sbi	0x15, 1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 3fa:	95 e0       	ldi	r25, 0x05	; 5
+ 3fc:	9a 95       	dec	r25
+ 3fe:	f1 f7       	brne	.-4      	; 0x3fc <LCD_Command+0x14>
+ 400:	00 00       	nop
+	_delay_us(1);
+	LCD_Port &= ~ (1<<EN);
+ 402:	a9 98       	cbi	0x15, 1	; 21
+ 404:	ef e1       	ldi	r30, 0x1F	; 31
+ 406:	f3 e0       	ldi	r31, 0x03	; 3
+ 408:	31 97       	sbiw	r30, 0x01	; 1
+ 40a:	f1 f7       	brne	.-4      	; 0x408 <LCD_Command+0x20>
+ 40c:	00 c0       	rjmp	.+0      	; 0x40e <LCD_Command+0x26>
+ 40e:	00 00       	nop
+
+	_delay_us(200);
+
+	LCD_Port = (LCD_Port & 0xC3) | (cmnd << 2);  /* sending lower nibble */
+ 410:	95 b3       	in	r25, 0x15	; 21
+ 412:	88 0f       	add	r24, r24
+ 414:	88 0f       	add	r24, r24
+ 416:	93 7c       	andi	r25, 0xC3	; 195
+ 418:	89 2b       	or	r24, r25
+ 41a:	85 bb       	out	0x15, r24	; 21
+	LCD_Port |= (1<<EN);
+ 41c:	a9 9a       	sbi	0x15, 1	; 21
+ 41e:	f5 e0       	ldi	r31, 0x05	; 5
+ 420:	fa 95       	dec	r31
+ 422:	f1 f7       	brne	.-4      	; 0x420 <LCD_Command+0x38>
+ 424:	00 00       	nop
+	_delay_us(1);
+	LCD_Port &= ~ (1<<EN);
+ 426:	a9 98       	cbi	0x15, 1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 428:	8f e3       	ldi	r24, 0x3F	; 63
+ 42a:	9f e1       	ldi	r25, 0x1F	; 31
+ 42c:	01 97       	sbiw	r24, 0x01	; 1
+ 42e:	f1 f7       	brne	.-4      	; 0x42c <LCD_Command+0x44>
+ 430:	00 c0       	rjmp	.+0      	; 0x432 <LCD_Command+0x4a>
+ 432:	00 00       	nop
+ 434:	08 95       	ret
+
+00000436 <LCD_Char>:
+}
+
+
+void LCD_Char( unsigned char data )
+{
+	LCD_Port = (LCD_Port & 0xC3) | (data >> 2 ); /* sending upper nibble */
+ 436:	95 b3       	in	r25, 0x15	; 21
+ 438:	28 2f       	mov	r18, r24
+ 43a:	26 95       	lsr	r18
+ 43c:	26 95       	lsr	r18
+ 43e:	93 7c       	andi	r25, 0xC3	; 195
+ 440:	92 2b       	or	r25, r18
+ 442:	95 bb       	out	0x15, r25	; 21
+	LCD_Port |= (1<<RS);		/* RS=1, data reg. */
+ 444:	a8 9a       	sbi	0x15, 0	; 21
+	LCD_Port|= (1<<EN);
+ 446:	a9 9a       	sbi	0x15, 1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 448:	95 e0       	ldi	r25, 0x05	; 5
+ 44a:	9a 95       	dec	r25
+ 44c:	f1 f7       	brne	.-4      	; 0x44a <LCD_Char+0x14>
+ 44e:	00 00       	nop
+	_delay_us(1);
+	LCD_Port &= ~ (1<<EN);
+ 450:	a9 98       	cbi	0x15, 1	; 21
+ 452:	ef e1       	ldi	r30, 0x1F	; 31
+ 454:	f3 e0       	ldi	r31, 0x03	; 3
+ 456:	31 97       	sbiw	r30, 0x01	; 1
+ 458:	f1 f7       	brne	.-4      	; 0x456 <LCD_Char+0x20>
+ 45a:	00 c0       	rjmp	.+0      	; 0x45c <LCD_Char+0x26>
+ 45c:	00 00       	nop
+
+	_delay_us(200);
+
+	LCD_Port = (LCD_Port & 0xC3) | (data << 2); /* sending lower nibble */
+ 45e:	95 b3       	in	r25, 0x15	; 21
+ 460:	88 0f       	add	r24, r24
+ 462:	88 0f       	add	r24, r24
+ 464:	93 7c       	andi	r25, 0xC3	; 195
+ 466:	89 2b       	or	r24, r25
+ 468:	85 bb       	out	0x15, r24	; 21
+	LCD_Port |= (1<<EN);
+ 46a:	a9 9a       	sbi	0x15, 1	; 21
+ 46c:	f5 e0       	ldi	r31, 0x05	; 5
+ 46e:	fa 95       	dec	r31
+ 470:	f1 f7       	brne	.-4      	; 0x46e <LCD_Char+0x38>
+ 472:	00 00       	nop
+	_delay_us(1);
+	LCD_Port &= ~ (1<<EN);
+ 474:	a9 98       	cbi	0x15, 1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 476:	8f e3       	ldi	r24, 0x3F	; 63
+ 478:	9f e1       	ldi	r25, 0x1F	; 31
+ 47a:	01 97       	sbiw	r24, 0x01	; 1
+ 47c:	f1 f7       	brne	.-4      	; 0x47a <LCD_Char+0x44>
+ 47e:	00 c0       	rjmp	.+0      	; 0x480 <LCD_Char+0x4a>
+ 480:	00 00       	nop
+ 482:	08 95       	ret
+
+00000484 <LCD_Init>:
+	_delay_ms(2);
+}
+
+void LCD_Init (void)			/* LCD Initialize function */
+{
+	LCD_Dir = 0x3F;			/* Make LCD port direction as o/p */
+ 484:	8f e3       	ldi	r24, 0x3F	; 63
+ 486:	84 bb       	out	0x14, r24	; 20
+ 488:	2f ef       	ldi	r18, 0xFF	; 255
+ 48a:	89 ef       	ldi	r24, 0xF9	; 249
+ 48c:	90 e0       	ldi	r25, 0x00	; 0
+ 48e:	21 50       	subi	r18, 0x01	; 1
+ 490:	80 40       	sbci	r24, 0x00	; 0
+ 492:	90 40       	sbci	r25, 0x00	; 0
+ 494:	e1 f7       	brne	.-8      	; 0x48e <LCD_Init+0xa>
+ 496:	00 c0       	rjmp	.+0      	; 0x498 <LCD_Init+0x14>
+ 498:	00 00       	nop
+	_delay_ms(20);			/* LCD Power ON delay always >15ms */
+	
+	LCD_Command(0x02);		/* send for 4 bit initialization of LCD  */
+ 49a:	82 e0       	ldi	r24, 0x02	; 2
+ 49c:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+	LCD_Command(0x28);              /* 2 line, 5*7 matrix in 4-bit mode */
+ 4a0:	88 e2       	ldi	r24, 0x28	; 40
+ 4a2:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+	LCD_Command(0x0c);              /* Display on cursor off*/
+ 4a6:	8c e0       	ldi	r24, 0x0C	; 12
+ 4a8:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+	LCD_Command(0x06);              /* Increment cursor (shift cursor to right)*/
+ 4ac:	86 e0       	ldi	r24, 0x06	; 6
+ 4ae:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+	LCD_Command(0x01);              /* Clear display screen*/
+ 4b2:	81 e0       	ldi	r24, 0x01	; 1
+ 4b4:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+ 4b8:	8f e3       	ldi	r24, 0x3F	; 63
+ 4ba:	9f e1       	ldi	r25, 0x1F	; 31
+ 4bc:	01 97       	sbiw	r24, 0x01	; 1
+ 4be:	f1 f7       	brne	.-4      	; 0x4bc <LCD_Init+0x38>
+ 4c0:	00 c0       	rjmp	.+0      	; 0x4c2 <LCD_Init+0x3e>
+ 4c2:	00 00       	nop
+ 4c4:	08 95       	ret
+
+000004c6 <LCD_String>:
+	_delay_ms(2);
+}
+
+
+void LCD_String(char *str)
+{
+ 4c6:	cf 93       	push	r28
+ 4c8:	df 93       	push	r29
+ 4ca:	ec 01       	movw	r28, r24
+	
+	int i;
+	for(i=0; str[i]!=0; i++)
+ 4cc:	88 81       	ld	r24, Y
+ 4ce:	88 23       	and	r24, r24
+ 4d0:	31 f0       	breq	.+12     	; 0x4de <LCD_String+0x18>
+ 4d2:	21 96       	adiw	r28, 0x01	; 1
+	{
+		
+		LCD_Char(str[i]);
+ 4d4:	0e 94 1b 02 	call	0x436	; 0x436 <LCD_Char>
+
+void LCD_String(char *str)
+{
+	
+	int i;
+	for(i=0; str[i]!=0; i++)
+ 4d8:	89 91       	ld	r24, Y+
+ 4da:	81 11       	cpse	r24, r1
+ 4dc:	fb cf       	rjmp	.-10     	; 0x4d4 <LCD_String+0xe>
+	{
+		
+		LCD_Char(str[i]);
+	}
+}
+ 4de:	df 91       	pop	r29
+ 4e0:	cf 91       	pop	r28
+ 4e2:	08 95       	ret
+
+000004e4 <LCD_Clear>:
+}
+
+void LCD_Clear()
+{
+	
+	LCD_Command(0x01); /*clear display */
+ 4e4:	81 e0       	ldi	r24, 0x01	; 1
+ 4e6:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+ 4ea:	8f e3       	ldi	r24, 0x3F	; 63
+ 4ec:	9f e1       	ldi	r25, 0x1F	; 31
+ 4ee:	01 97       	sbiw	r24, 0x01	; 1
+ 4f0:	f1 f7       	brne	.-4      	; 0x4ee <LCD_Clear+0xa>
+ 4f2:	00 c0       	rjmp	.+0      	; 0x4f4 <LCD_Clear+0x10>
+ 4f4:	00 00       	nop
+	_delay_ms(2);
+	LCD_Command(0x80); /* cursor at home position */
+ 4f6:	80 e8       	ldi	r24, 0x80	; 128
+ 4f8:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_Command>
+ 4fc:	08 95       	ret
+
+000004fe <__vector_9>:
+	strcat(myString, "cm");
+	return myString;
+}
+
+ISR(TIMER1_OVF_vect)
+{
+ 4fe:	1f 92       	push	r1
+ 500:	0f 92       	push	r0
+ 502:	0f b6       	in	r0, 0x3f	; 63
+ 504:	0f 92       	push	r0
+ 506:	11 24       	eor	r1, r1
+ 508:	8f 93       	push	r24
+ 50a:	9f 93       	push	r25
+	TimerOverflow++;	/* Increment Timer Overflow count */
+ 50c:	80 91 a9 01 	lds	r24, 0x01A9
+ 510:	90 91 aa 01 	lds	r25, 0x01AA
+ 514:	01 96       	adiw	r24, 0x01	; 1
+ 516:	90 93 aa 01 	sts	0x01AA, r25
+ 51a:	80 93 a9 01 	sts	0x01A9, r24
+}
+ 51e:	9f 91       	pop	r25
+ 520:	8f 91       	pop	r24
+ 522:	0f 90       	pop	r0
+ 524:	0f be       	out	0x3f, r0	; 63
+ 526:	0f 90       	pop	r0
+ 528:	1f 90       	pop	r1
+ 52a:	18 95       	reti
+
+0000052c <USART_Init>:
+#include "USART_RS232_H_file.h"						/* Include USART header file */
+
+void USART_Init(unsigned long BAUDRATE)				/* USART initialize function */
+{ 
+	//unsigned BAUD  =  (((F_CPU / (BAUDRATE * 16))) - 1);
+	UCSRB |= (1 << RXEN) | (1 << TXEN) | (1 << RXCIE);	/* Enable USART transmitter and receiver */
+ 52c:	8a b1       	in	r24, 0x0a	; 10
+ 52e:	88 69       	ori	r24, 0x98	; 152
+ 530:	8a b9       	out	0x0a, r24	; 10
+	UCSRC |= (1 << URSEL)| (1 << UCSZ1) | (1 << UCSZ0);	/* Write USCRC for 8 bit data and 1 stop bit */ 
+ 532:	80 b5       	in	r24, 0x20	; 32
+ 534:	86 68       	ori	r24, 0x86	; 134
+ 536:	80 bd       	out	0x20, r24	; 32
+	UBRRL = 103;							/* Load UBRRL with lower 8 bit of prescale value */
+ 538:	87 e6       	ldi	r24, 0x67	; 103
+ 53a:	89 b9       	out	0x09, r24	; 9
+	UBRRH = (103 >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
+ 53c:	10 bc       	out	0x20, r1	; 32
+ 53e:	08 95       	ret
+
+00000540 <USART_TxChar>:
+	return(UDR);									/* Get and return received data */ 
+}
+
+void USART_TxChar(char data)						/* Data transmitting function */
+{
+	UDR = data;										/* Write data to be transmitting in UDR */
+ 540:	8c b9       	out	0x0c, r24	; 12
+	while (!(UCSRA & (1<<UDRE)));					/* Wait until data transmit and buffer get empty */
+ 542:	5d 9b       	sbis	0x0b, 5	; 11
+ 544:	fe cf       	rjmp	.-4      	; 0x542 <USART_TxChar+0x2>
+}
+ 546:	08 95       	ret
+
+00000548 <USART_SendString>:
+
+void USART_SendString(char *str)					/* Send string of USART data function */ 
+{
+ 548:	cf 93       	push	r28
+ 54a:	df 93       	push	r29
+ 54c:	ec 01       	movw	r28, r24
+	int i=0;																	
+	while (str[i]!=0)
+ 54e:	88 81       	ld	r24, Y
+ 550:	88 23       	and	r24, r24
+ 552:	31 f0       	breq	.+12     	; 0x560 <USART_SendString+0x18>
+ 554:	21 96       	adiw	r28, 0x01	; 1
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+ 556:	0e 94 a0 02 	call	0x540	; 0x540 <USART_TxChar>
+}
+
+void USART_SendString(char *str)					/* Send string of USART data function */ 
+{
+	int i=0;																	
+	while (str[i]!=0)
+ 55a:	89 91       	ld	r24, Y+
+ 55c:	81 11       	cpse	r24, r1
+ 55e:	fb cf       	rjmp	.-10     	; 0x556 <USART_SendString+0xe>
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+		i++;
+	}
+ 560:	df 91       	pop	r29
+ 562:	cf 91       	pop	r28
+ 564:	08 95       	ret
+
+00000566 <strncmp>:
+ 566:	fb 01       	movw	r30, r22
+ 568:	dc 01       	movw	r26, r24
+ 56a:	41 50       	subi	r20, 0x01	; 1
+ 56c:	50 40       	sbci	r21, 0x00	; 0
+ 56e:	30 f0       	brcs	.+12     	; 0x57c <strncmp+0x16>
+ 570:	8d 91       	ld	r24, X+
+ 572:	01 90       	ld	r0, Z+
+ 574:	80 19       	sub	r24, r0
+ 576:	19 f4       	brne	.+6      	; 0x57e <strncmp+0x18>
+ 578:	00 20       	and	r0, r0
+ 57a:	b9 f7       	brne	.-18     	; 0x56a <strncmp+0x4>
+ 57c:	88 1b       	sub	r24, r24
+ 57e:	99 0b       	sbc	r25, r25
+ 580:	08 95       	ret
+
+00000582 <strstr>:
+ 582:	fb 01       	movw	r30, r22
+ 584:	51 91       	ld	r21, Z+
+ 586:	55 23       	and	r21, r21
+ 588:	a9 f0       	breq	.+42     	; 0x5b4 <strstr+0x32>
+ 58a:	bf 01       	movw	r22, r30
+ 58c:	dc 01       	movw	r26, r24
+ 58e:	4d 91       	ld	r20, X+
+ 590:	45 17       	cp	r20, r21
+ 592:	41 11       	cpse	r20, r1
+ 594:	e1 f7       	brne	.-8      	; 0x58e <strstr+0xc>
+ 596:	59 f4       	brne	.+22     	; 0x5ae <strstr+0x2c>
+ 598:	cd 01       	movw	r24, r26
+ 59a:	01 90       	ld	r0, Z+
+ 59c:	00 20       	and	r0, r0
+ 59e:	49 f0       	breq	.+18     	; 0x5b2 <strstr+0x30>
+ 5a0:	4d 91       	ld	r20, X+
+ 5a2:	40 15       	cp	r20, r0
+ 5a4:	41 11       	cpse	r20, r1
+ 5a6:	c9 f3       	breq	.-14     	; 0x59a <strstr+0x18>
+ 5a8:	fb 01       	movw	r30, r22
+ 5aa:	41 11       	cpse	r20, r1
+ 5ac:	ef cf       	rjmp	.-34     	; 0x58c <strstr+0xa>
+ 5ae:	81 e0       	ldi	r24, 0x01	; 1
+ 5b0:	90 e0       	ldi	r25, 0x00	; 0
+ 5b2:	01 97       	sbiw	r24, 0x01	; 1
+ 5b4:	08 95       	ret
+
+000005b6 <_exit>:
+ 5b6:	f8 94       	cli
+
+000005b8 <__stop_program>:
+ 5b8:	ff cf       	rjmp	.-2      	; 0x5b8 <__stop_program>
