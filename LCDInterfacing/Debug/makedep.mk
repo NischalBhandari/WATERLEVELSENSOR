@@ -8,5 +8,7 @@ lcd\lcdlib.c
 
 sensor\ultrasonic.c
 
+SIMComm\TCPClientConnect.c
+
 uart\USART_RS232_C_file.c
 

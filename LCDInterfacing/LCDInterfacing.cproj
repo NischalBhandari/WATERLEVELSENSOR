@@ -121,6 +121,12 @@
     <Compile Include="sensor\ultrasonic.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SIMComm\TCPClientConnect.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SIMComm\TCPClientConnect.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="uart\USART_RS232_C_file.c">
       <SubType>compile</SubType>
     </Compile>
@@ -130,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lcd" />
+    <Folder Include="SIMComm" />
     <Folder Include="sensor" />
     <Folder Include="uart" />
   </ItemGroup>

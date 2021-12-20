@@ -33,6 +33,7 @@ LIB_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../lcd \
+../SIMComm \
 ../sensor \
 ../uart
 
@@ -42,6 +43,7 @@ C_SRCS +=  \
 ../LCDInterfacing.c \
 ../lcd/lcdlib.c \
 ../sensor/ultrasonic.c \
+../SIMComm/TCPClientConnect.c \
 ../uart/USART_RS232_C_file.c
 
 
@@ -55,24 +57,28 @@ OBJS +=  \
 LCDInterfacing.o \
 lcd/lcdlib.o \
 sensor/ultrasonic.o \
+SIMComm/TCPClientConnect.o \
 uart/USART_RS232_C_file.o
 
 OBJS_AS_ARGS +=  \
 LCDInterfacing.o \
 lcd/lcdlib.o \
 sensor/ultrasonic.o \
+SIMComm/TCPClientConnect.o \
 uart/USART_RS232_C_file.o
 
 C_DEPS +=  \
 LCDInterfacing.d \
 lcd/lcdlib.d \
 sensor/ultrasonic.d \
+SIMComm/TCPClientConnect.d \
 uart/USART_RS232_C_file.d
 
 C_DEPS_AS_ARGS +=  \
 LCDInterfacing.d \
 lcd/lcdlib.d \
 sensor/ultrasonic.d \
+SIMComm/TCPClientConnect.d \
 uart/USART_RS232_C_file.d
 
 OUTPUT_FILE_PATH +=LCDInterfacing.elf
@@ -86,6 +92,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
@@ -110,6 +118,13 @@ lcd/%.o: ../lcd/%.c
 	
 
 sensor/%.o: ../sensor/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SIMComm/%.o: ../SIMComm/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -11,8 +11,8 @@ void USART_Init(unsigned long BAUDRATE)				/* USART initialize function */
 	//unsigned BAUD  =  (((F_CPU / (BAUDRATE * 16))) - 1);
 	UCSRB |= (1 << RXEN) | (1 << TXEN) | (1 << RXCIE);	/* Enable USART transmitter and receiver */
 	UCSRC |= (1 << URSEL)| (1 << UCSZ1) | (1 << UCSZ0);	/* Write USCRC for 8 bit data and 1 stop bit */ 
-	UBRRL = 103;							/* Load UBRRL with lower 8 bit of prescale value */
-	UBRRH = (103 >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
+	UBRRL = 8;							/* Load UBRRL with lower 8 bit of prescale value */
+	UBRRH = (8 >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
 }
 
 char USART_RxChar()									/* Data receiving function */
